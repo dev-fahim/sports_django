@@ -11,6 +11,9 @@ class EventTypeChoice(models.TextChoices):
 class Department(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Student(models.Model):
     profile = models.OneToOneField('user_profile.Profile', on_delete=models.CASCADE)
