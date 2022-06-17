@@ -64,7 +64,6 @@ class GroupAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('id', 'group', 'name')
     list_filter = ('group',)
-    raw_id_fields = ('players',)
     search_fields = ('name',)
 
 
