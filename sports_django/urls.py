@@ -17,6 +17,9 @@ from django.urls import path
 
 from django.contrib import admin
 
+from user_profile.views import register
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('registration/', register)
 ]
