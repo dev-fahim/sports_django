@@ -1,0 +1,33 @@
+{% extends 'site/base.html' %}
+
+{% block content %}
+
+    {% include 'site/pagination.html' %}
+
+    <div class="tw-mb-10">
+        <div class="list-group">
+            {% for event in page_obj %}
+                <a href="{% url 'sports:event-object' event.id %}" class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="my-3 tw-text-3xl">{{ event.name | title }}</h5>
+                        <small>{{ event.starts }}</small>
+                    </div>
+                    <div class="tw-mb-1 tw-flex tw-flex-row tw-items-start tw-justify-start tw-gap-5">
+                        {% if event.image %}
+                            <img class="tw-object-cover tw-h-48 tw-rounded-2xl" src="{{ event.image.url }}"
+                                 alt="{{ event.name }}">
+                        {% else %}
+                            <img class="tw-object-cover tw-h-48 tw-rounded-2xl" src="https://via.placeholder.com/297x192" alt="{{ event.name }}">
+                        {% endif %}
+                        <p>{{ event.desc }}</p>
+                    </div>
+                    <small>{{ event.get_event_type_display }}</small>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% include 'site/pagination.html' %}
+
+{% endblock %}

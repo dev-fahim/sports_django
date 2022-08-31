@@ -15,3 +15,4 @@ class ProfileAdmin(admin.ModelAdmin):
         'address',
     )
     list_filter = ('user',)
+    search_fields = ('user__first_name', 'user__last_name', 'phone_number')

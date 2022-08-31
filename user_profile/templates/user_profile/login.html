@@ -1,12 +1,13 @@
 {% extends 'site/base.html' %}
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="row">
         <div class="col-6">
             <form action="" method="POST">
                 {% csrf_token %}
-                {% crispy form %}
-                <button type="submit" class="btn btn-primary mt-3">Register</button>
+                {{ form | crispy }}
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
             </form>
         </div>
     </div>
