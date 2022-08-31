@@ -1,0 +1,95 @@
+{% extends 'site/base.html' %}
+{% block content %}
+    <div>
+        <div>
+            {% if event.image %}
+                <img class="tw-object-cover tw-object-center tw-h-80 tw-w-full" src="{{ event.image.url }}"
+                     alt="{{ event.name }}">
+            {% else %}
+                <img class="tw-object-cover" src="https://via.placeholder.com/1900x300"
+                     alt="{{ event.name }}">
+            {% endif %}
+        </div>
+        <div class="tw-flex tw-flex-row my-4 tw-items-center tw-justify-between">
+            <h1 class="tw-text-6xl">{{ event.name }}</h1>
+            <small class="tw-text-lg tw-text-gray-400">{{ event.starts }}</small>
+        </div>
+        <div class="tw-bg-indigo-900 tw-h-40 tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <p class="tw-text-4xl tw-text-indigo-50">Ends in {{ event.ends | timeuntil }}</p>
+        </div>
+        <div class="mt-5">
+            <h2 class="tw-text-3xl mb-3">Managers</h2>
+            <ul class="list-group">
+                {% for manager in event.manager_set.all %}
+                    <li class="list-group-item"><b>{{ manager.profile.get_user_type_display }}</b> - {{ manager.profile }}, {{ manager.profile.department }}, <i>Begum Rokeya University, Rangupr</i></li>
+                {% endfor %}
+
+            </ul>
+        </div>
+        <div class="mt-5">
+            <h2 class="tw-text-3xl mb-3">Groups & Teams</h2>
+            <ul class="list-group">
+                {% for group in event.group_set.all %}
+                    <li class="list-group-item list-group-item-action active tw-text-2xl"
+                        aria-current="true">{{ group.name | upper }}</li>
+                    {% for team in group.team_set.all %}
+                        <li class="list-group-item" aria-current="true">
+                            <b>{{ team.name | upper }}</b>
+                            <div class="pl-4">
+                                {% for team_player in team.players.all %}
+                                    <span><i class="tw-text-lg">{{ team_player.player.profile }}, </i></span>
+                                {% endfor %}
+                            </div>
+
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="mt-5">
+            <h2 class="tw-text-3xl mb-3">Match & Standings</h2>
+            <ul class="list-group">
+                {% for match in event.match_set.all %}
+                    <li class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="tw-flex tw-flex-row tw-items-start tw-justify-between">
+                            <div class="pb-3">
+                                {{ match.name | upper }}
+                                {% if match.time %}
+                                    {% if match.time > now %}
+                                        <p>Starts {{ match.time }}</p>
+                                    {% else %}
+                                        <p>Ended {{ match.time }}</p>
+                                    {% endif %}
+                                {% endif %}
+                                <p><b><i>Venue: {{ match.venue.name }}</i></b></p>
+                            </div>
+
+                            <div class="tw-float-right">
+                                {% if match.venue.image %}
+                                    <img class="tw-object-cover tw-h-48 tw-rounded-2xl" src="{{ match.venue.url }}"
+                                         alt="{{ match.venue.name }}">
+                                {% else %}
+                                    <img class="tw-object-cover tw-h-48 tw-rounded-2xl"
+                                         src="https://via.placeholder.com/297x192" alt="{{ match.venue.name }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    {% for standing in match.standing_set.all %}
+                        <li class="list-group-item" aria-current="true">
+                            <div class="tw-flex tw-flex-row tw-items-center tw-justify-between">
+                                <p>{{ standing.team.name }} </p>
+                                <p>Gained Points {{ standing.gained_points }}</p>
+                                {% if standing.has_won %}
+                                    <p><span class="badge text-bg-success">Won</span></p>
+                                {% else %}
+                                    <p><span class="badge text-bg-danger">Lost</span></p>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

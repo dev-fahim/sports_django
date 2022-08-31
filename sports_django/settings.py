@@ -14,8 +14,12 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dj_database_url
+import dotenv
+from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dotenv.load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +31,7 @@ SECRET_KEY = 'django-insecure-79l0al%9gx!he7g7g-*76bb!+j1icn%taptpe)foiutkclxer*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'tailwind',
     'django_extensions',
     'sports',
     'user_profile',
+    'theme'
 ]
 
 MIDDLEWARE = [
@@ -80,10 +87,11 @@ WSGI_APPLICATION = 'sports_django.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-
-print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -125,3 +133,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_URL = reverse_lazy('user_profile:login')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'uploads'
+
+UPLOAD_DIRECTORY = 'uploads'
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

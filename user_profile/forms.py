@@ -3,7 +3,12 @@ from django import forms
 from user_profile.models import GenderChoice
 
 
-class RegistrationForm(forms.Form):
+class LoginForm(forms.Form):
+    email = forms.EmailField(required=True)
+    password = forms.CharField(widget=forms.PasswordInput())
+
+
+class SignUpForm(forms.Form):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField()
@@ -14,11 +19,6 @@ class RegistrationForm(forms.Form):
 
     password = forms.CharField(widget=forms.PasswordInput)
     password_confirm = forms.CharField(widget=forms.PasswordInput)
-
-    def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
 
     def clean(self):
         form_data = self.cleaned_data
