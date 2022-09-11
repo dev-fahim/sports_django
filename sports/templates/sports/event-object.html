@@ -21,10 +21,18 @@
             <h2 class="tw-text-3xl mb-3">Managers</h2>
             <ul class="list-group">
                 {% for manager in event.manager_set.all %}
-                    <li class="list-group-item"><b>{{ manager.profile.get_user_type_display }}</b> - {{ manager.profile }}, {{ manager.profile.department }}, <i>Begum Rokeya University, Rangupr</i></li>
+                    <li class="list-group-item"><b>{{ manager.profile.get_user_type_display }}</b>
+                        - {{ manager.profile }}, {{ manager.profile.department }}, <i>Begum Rokeya University,
+                            Rangupr</i></li>
                 {% endfor %}
 
             </ul>
+            {% if request.user.is_superuser %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="GENERATE FIXTURE" class="btn btn-primary">
+                </form>
+            {% endif %}
         </div>
         <div class="mt-5">
             <h2 class="tw-text-3xl mb-3">Groups & Teams</h2>

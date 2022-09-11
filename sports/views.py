@@ -6,7 +6,8 @@ from django.utils import timezone
 from sports import queries as sports_queries
 
 # Create your views here.
-from sports.models import Group
+from sports.models import Group, Venue
+from sports.queries import generate_fixture_table
 
 
 @login_required
@@ -24,12 +25,15 @@ def all_events(request):
 @login_required
 def event_object(request, pk: int):
     event = sports_queries.get_all_events().get(pk=pk)
-    groups = Group.objects.filter()
 
     context = {
         'event': event,
         'now': timezone.now()
     }
+
+    if request.method == 'POST' and request.user.is_superuser:
+        venues = Venue.objects.all()
+        generate_fixture_table(event.id, 4, venues)
 
     return render(request, 'sports/event-object.html', context=context)
 
