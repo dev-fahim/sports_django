@@ -19,12 +19,13 @@ from django.urls import path, include
 
 from django.contrib import admin
 
-from user_profile.views import user_signup
 from sports.views import home
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('admin/', admin.site.urls),
-    path('u/', include('user_profile.urls', namespace='user_profile')),
-    path('e/', include('sports.urls', namespace='sports')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('', home, name='home'),
+                  path('admin/', admin.site.urls),
+
+                  path('baton/', include('baton.urls')),
+                  path('u/', include('user_profile.urls', namespace='user_profile')),
+                  path('e/', include('sports.urls', namespace='sports')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

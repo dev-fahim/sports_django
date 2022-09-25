@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'baton',
     'sports_admin.apps.SportsAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +50,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'sports',
     'user_profile',
-    'theme'
+    'theme',
+    'baton.autodiscover',
 ]
 
 MIDDLEWARE = [
@@ -99,6 +101,7 @@ DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -156,3 +159,26 @@ INTERNAL_IPS = [
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+from django.utils.timezone import now
+
+BATON = {
+    'SITE_HEADER': 'Digital Sports Management System',
+    'SITE_TITLE': 'Digital Sports Management System',
+    'INDEX_TITLE': 'System Admin',
+    'SUPPORT_HREF': 'https://support.university-auction.marvelous-tech.com',
+    'COPYRIGHT':
+        f'Copyright © 2020 {now().year} '
+        '<a href="https://www.marvelous-tech.com">Marvelous Technologies</a>',
+    'POWERED_BY': '<a href="https://www.marvelous-tech.com">Marvelous Technologies</a>',
+    'CONFIRM_UNSAVED_CHANGES': True,
+    'SHOW_MULTIPART_UPLOADING': True,
+    'ENABLE_IMAGES_PREVIEW': True,
+    'CHANGELIST_FILTERS_IN_MODAL': True,
+    'CHANGELIST_FILTERS_ALWAYS_OPEN': False,
+    'CHANGELIST_FILTERS_FORM': True,
+    'MENU_ALWAYS_COLLAPSED': False,
+    'MENU_TITLE': 'Menu',
+    'MESSAGES_TOASTS': True,
+    'GRAVATAR_DEFAULT_IMG': 'retro',
+}
