@@ -145,6 +145,8 @@ LOGIN_URL = reverse_lazy('user_profile:login')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
+STATIC_ROOT = BASE_DIR / 'statics'
+
 UPLOAD_DIRECTORY = 'uploads'
 
 TAILWIND_APP_NAME = 'theme'
