@@ -25,7 +25,7 @@ class Profile(models.Model):
 
     gender = models.CharField(max_length=10, choices=GenderChoice.choices, default=GenderChoice.MALE)
     user_type = models.CharField(max_length=100, choices=UserTypeChoice.choices, default=UserTypeChoice.STUDENT)
-    phone_number = models.CharField(max_length=11, null=True, blank=True)
+    phone_number = models.CharField(max_length=100, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
 
     def __str__(self):
