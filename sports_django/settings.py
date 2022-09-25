@@ -169,8 +169,8 @@ BATON = {
     'SUPPORT_HREF': 'https://support.university-auction.marvelous-tech.com',
     'COPYRIGHT':
         f'Copyright © 2020 {now().year} '
-        '<a href="https://www.marvelous-tech.com">Marvelous Technologies</a>',
-    'POWERED_BY': '<a href="https://www.marvelous-tech.com">Marvelous Technologies</a>',
+        '<a href="https://www.marvelous-tech.com">CSE Group 7</a>',
+    'POWERED_BY': '<a href="https://www.marvelous-tech.com">CSE Group 7</a>',
     'CONFIRM_UNSAVED_CHANGES': True,
     'SHOW_MULTIPART_UPLOADING': True,
     'ENABLE_IMAGES_PREVIEW': True,
